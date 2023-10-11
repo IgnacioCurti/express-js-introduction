@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "An introduction to Express.js, a node.js framework that allows us to build web applications and APIs easily and quickly.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
