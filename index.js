@@ -23,7 +23,7 @@ app.get('/getClients', (req, res) => {
 app.get('/getClientsById/:id', (req, res) => {
     const client = clients.filter((client) => client.id == req.params.id);
     if (client.length == 0) return res.status(404).send("The client with the given ID was not found.");
-    return res.status(200).send({client});
+    return res.status(200).send(client);
 });
 
 
