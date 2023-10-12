@@ -21,7 +21,7 @@ app.get('/params/:id', (req, res) => {
 
 app.post('/json', (req, res) => {
     console.log(req.body.name);
-    res.end();
+    res.send(req.body.name);
 });
 
 
