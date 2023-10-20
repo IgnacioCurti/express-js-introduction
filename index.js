@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use("/users", users)
-app.use("/product", product)
+app.use("/products", product)
 
 
 app.listen(PORT, () => {

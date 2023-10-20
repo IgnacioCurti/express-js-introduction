@@ -1,6 +1,6 @@
 import {Router} from "express";
 import fs from "fs";
-import {getNewId} from "./utils/utils.js";
+import {getNewId} from "../../utils/utils.js";
 
 
 const data = fs.readFileSync('./database/products.json');
@@ -14,7 +14,7 @@ router.get('/getProducts', (req, res) => {
 });
 
 
-router.get('/getProducts/:id', (req, res) => {
+router.get('/getProductsById/:id', (req, res) => {
     const product = products.filter((product) => product.id == req.params.id);
     if (product.length == 0) return res.status(404).send("The product with the given ID was not found.");
     return res.status(200).send(product);

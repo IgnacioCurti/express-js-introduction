@@ -1,6 +1,6 @@
 import {Router} from "express";
 import fs from "fs";
-import {getNewId} from "./utils/utils.js";
+import {getNewId} from "../../utils/utils.js";
 
 
 const data = fs.readFileSync('./database/clients.json');
