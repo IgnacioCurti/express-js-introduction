@@ -1,35 +1,26 @@
 import {Router} from "express";
-import fs from "fs";
-import {getNewId} from "../../utils/utils.js";
+import {Product} from "../models/product.js";
 
-
-const data = fs.readFileSync('./database/products.json');
-const products = JSON.parse(data);
 
 const router = Router();
 
 
-router.get('/getProducts', (req, res) => {
+router.get('/getProducts', async (req, res) => {
+    const products = await Product.find();
     res.status(200).send(products);
 });
 
 
-router.get('/getProductsById/:id', (req, res) => {
-    const product = products.filter((product) => product.id == req.params.id);
-    if (product.length == 0) return res.status(404).send("The product with the given ID was not found.");
+router.get('/getProductById/:id', async (req, res) => {
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).send("The product with the given ID was not found.");
     return res.status(200).send(product);
 });
 
 
-router.post('/addProduct', (req, res) => {
-    const newProduct = {
-        "id": getNewId(products),
-        "name": req.body?.name,
-        "price": req.body?.price,
-        "stock": req.body?.stock
-    }
-    products.push(newProduct)
-    fs.writeFileSync('./database/products.json', JSON.stringify(products));
+router.post('/addProduct', async (req, res) => {
+    const newProduct = new Product(req.body)
+    await newProduct.save()
     return res.status(201).send(newProduct)
 });
 
