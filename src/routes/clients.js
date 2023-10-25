@@ -1,5 +1,7 @@
 import {Router} from "express";
 import {Client} from "../models/client.js"; 
+import { auth } from "../middleware/auth.js";
+import { isAdmin } from "../middleware/isAdmin.js";
 
 
 const router = Router();
@@ -23,6 +25,13 @@ router.post('/addClient', async (req, res) => {
     await newClient.save()
     return res.status(201).send(newClient)
 });
+
+
+router.delete('/deleteClient/:id', [auth, isAdmin], async (req, res) => {
+    const user = await Client.findById(req.params.id);
+    if (!user) return res.status(404).send("The client with the given ID was not found.")
+    res.send(user)
+})
 
 
 export default router

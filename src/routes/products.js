@@ -1,5 +1,6 @@
 import {Router} from "express";
 import {Product} from "../models/product.js";
+import {auth} from "../middleware/auth.js";
 
 
 const router = Router();
@@ -18,7 +19,7 @@ router.get('/getProductById/:id', async (req, res) => {
 });
 
 
-router.post('/addProduct', async (req, res) => {
+router.post('/addProduct', auth, async (req, res) => {
     const newProduct = new Product(req.body)
     await newProduct.save()
     return res.status(201).send(newProduct)
