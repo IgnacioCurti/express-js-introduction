@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import users from "./src/routes/clients.js";
+import clients from "./src/routes/clients.js";
 import product from "./src/routes/products.js";
 
 
@@ -10,7 +10,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use("/users", users)
+app.use("/clients", clients)
 app.use("/products", product)
 
 
