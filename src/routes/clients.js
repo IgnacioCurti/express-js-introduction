@@ -28,7 +28,7 @@ router.post('/addClient', async (req, res) => {
 
 
 router.delete('/deleteClient/:id', [auth, isAdmin], async (req, res) => {
-    const user = await Client.findById(req.params.id);
+    const user = await Client.findByIdAndDelete(req.params.id);
     if (!user) return res.status(404).send("The client with the given ID was not found.")
     res.send(user)
 })
