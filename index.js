@@ -32,8 +32,7 @@ app.post('/addClient', (req, res) => {
         "id": getNewId(clients),
         "name": req.body?.name,
         "lastName": req.body?.lastName,
-        "address": req.body?.address,
-        "friends": req.body?.friends
+        "phoneNumber": req.body?.phoneNumber,
     }
     clients.push(newClient)
     fs.writeFileSync('./database/clients.json', JSON.stringify(clients));
